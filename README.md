@@ -1,2 +1,2 @@
 # powershell-library
-some powershell scritps
+some powershell scripts
