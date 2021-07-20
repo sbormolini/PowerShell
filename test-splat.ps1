@@ -5,17 +5,23 @@ $value = "File created at: $(Get-Date -Format "FileDateTime")"
 New-Item -Name "testv1-$([guid]::NewGuid().ToString()).txt" -Path $path -ItemType File -Value $value
 
 # version 2
+New-Item -Name "testv2-$([guid]::NewGuid().ToString()).txt" `
+         -Path $path `
+         -ItemType File `
+         -Value $value
+
+# version 3
 $parameters = @{
-    Name =  "testv2-$([guid]::NewGuid().ToString()).txt"
+    Name =  "testv3-$([guid]::NewGuid().ToString()).txt"
     Path = $path
     ItemType = "File"
     Value = $value
 }
 New-Item @parameters
 
-# version 3 - doesnt work
+# version 4 - doesnt work
 New-Item @{
-    Name =  "testv3-$([guid]::NewGuid().ToString()).txt"
+    Name =  "testv4-$([guid]::NewGuid().ToString()).txt"
     Path = $path
     ItemType = "File"
     Value = $value
