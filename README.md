@@ -1,2 +1,2 @@
 # powershell-library
-some powershell scripts
+PowerShell Library containing useful snippets and modules
