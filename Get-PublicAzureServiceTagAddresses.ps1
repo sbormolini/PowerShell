@@ -104,23 +104,29 @@ function Get-PublicAzureServiceTagAddresses
         [ValidateNotNullOrEmpty()]
         [switch]$IPv6
     )
+
+    # Offical url 
+    # todo / if fails get new version => change date "ServiceTags_Public_{date}.json"
+    $url = "https://download.microsoft.com/download/"
+    $downloadInstance = "7/1/D/71D86715-5596-4529-9B13-DA13A5DE5B63/"
+    #$fileAlternate = "ServiceTags_Public_20211101.json"
+    $file = "ServiceTags_Public_$(Get-Date -Format "yyyyMM")01.json"
+    $uri = $url + $downloadInstance + $file
+
     try
     {
-        # Offical url 
-        $url = "https://download.microsoft.com/download/7/1/D/71D86715-5596-4529-9B13-DA13A5DE5B63/ServiceTags_Public_20211101.json"
-
         if ( -not(Test-Path -Path $Path) )
         {
             Write-Warning -Message "Can not find valid ServiceTag json file!"
-            $answer = Read-Host -Prompt "Do you want do download it from ${url}? y/n"
+            $answer = Read-Host -Prompt "Do you want do download it from ${uri}? y/n"
             switch ($answer) 
             {
-                "y"
+                {($_ -eq "y") -or ($_ -eq "yes")}
                 {  
                     $Path = New-TemporaryFile
-                    Invoke-WebRequest -Uri $url -OutFile $Path
+                    Invoke-WebRequest -Uri $uri -OutFile $Path
                 }
-                "n"
+                {($_ -eq "n") -or ($_ -eq "no")}
                 { 
                     Write-Output -InputObject "Can not procced! Quit function"
                     exit 
@@ -144,8 +150,21 @@ function Get-PublicAzureServiceTagAddresses
         }
 
         $serviceRanges = $serviceTags.values.Where({$_.Name -like $name}).properties.addressPrefixes
-        #$ranges = $service.properties.addressPrefixes
+        
+        if ($null -eq $serviceRanges)
+        {
+            # get service
+            $serviceRanges = $serviceTags.values.Where({$_.Name -like $ServiceName}).properties.addressPrefixes
+            $region
 
+            # check ip ranges with ip finder api
+            if ($null -eq $Matches)
+            {
+                # get region by api ip finder calls
+            }
+        }
+
+        # filter for ipv4
         if ($IPv6 -eq $false)
         {
             $value = @() 
