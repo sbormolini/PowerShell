@@ -5,16 +5,26 @@
       "alignment": "left",
       "newline": true,
       "segments": [
-
+        {
+          "type": "shell",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "foreground": "#202020",
+          "background": "#e2e2e2",
+          "properties": {
+            
+          }
+        },
         {
           "background": "#555454",
           "foreground": "#ffffff",
-          "leading_diamond": "\ue0b6",
+          
+          "powerline_symbol": "\uE0B0",
           "properties": {
             "display_host": true,
-            "template": "{{ .UserName }}@{{ .HostName }} "
+            "template": " {{ .UserName }}@{{ .HostName }} "
           },
-          "style": "diamond",
+          "style": "powerline",
           "type": "session"
         },
         {
