@@ -1,0 +1,150 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "foreground": "#ffe9aa",
+          "properties": {
+            "template": "\uf0e7 "
+          },
+          "style": "plain",
+          "type": "root"
+        },
+        {
+          "foreground": "#ffffff",
+          "properties": {
+            "display_host": false,
+            "template": "{{ .UserName }} in"
+          },
+          "style": "plain",
+          "type": "session"
+        },
+        {
+          "foreground": "#55B9C4",
+          "properties": {
+            "folder_separator_icon": "/",
+            "home_icon": "~",
+            "max_depth": 2,
+            "style": "mixed",
+            "template": " \ue5fe {{ .Path }} "
+          },
+          "style": "plain",
+          "type": "path"
+        },
+        {
+          "foreground": "#95ffa4",
+          "properties": {
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "fetch_upstream_icon": true,
+            "template": "<#ffffff>on {{ .UpstreamIcon }}</>{{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }} "
+          },
+          "style": "plain",
+          "type": "git"
+        },
+        {
+          "foreground": "#502bd4",
+          "properties": {
+            "fetch_version": true,
+            "template": "<#ffffff>via</> \uE77F {{ .Full }} "
+          },
+          "style": "plain",
+          "type": "dotnet"
+        },
+        {
+          "foreground": "#e7e7e7",
+          "properties": {
+              "template": "<#4286f4>\uf104</><#FEAC19>\uf0e7</><#4286f4>\uf105</> {{ .Full }} ",
+              "fetch_version": true,
+              "display_mode": "files"
+          },
+          "style": "plain",
+          "type": "azfunc"
+        },
+        {
+          "foreground": "#83d2fe",
+          "properties": {
+            "template": "<#ffffff>via</> \uE235 {{ .Full }} ",
+            "display_mode": "context"
+          },
+          "type": "python",
+          "style": "plain"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "right",
+      "segments": [
+        {
+          "foreground": "#ffffff",
+          "properties": {
+            "always_enabled": true,
+            "template": " {{ if gt .Code 0 }}<#C94A16>\uf659</>{{ else }}<#63F08C>\uf633</>{{ end }} "
+          },
+          "style": "plain",
+          "type": "exit"
+        },
+        {
+          "foreground": "#ffffff",
+          "properties": {
+            "always_enabled": true,
+            "template": "{{ .FormattedMs }} "
+          },
+          "style": "plain",
+          "type": "executiontime"
+        },
+        {
+          "foreground": "#ffffff",
+          "properties": {
+            "charged_icon": "\uf583 ",
+            "charging_icon": "\uf588 ",
+            "discharging_icon": "\uf57d ",
+            "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}% "
+          },
+          "style": "plain",
+          "type": "battery"
+        },
+        {
+          "foreground": "#ffffff",
+          "properties": {
+            "template": " {{ .CurrentDate | date .Format }} ",
+            "time_format": "15:04"
+          },
+          "style": "plain",
+          "type": "time"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "#e2e2e2",
+          "properties": {
+            "template": "{{ .Name }} "
+          },
+          "type": "shell",
+          "style": "plain"
+        },
+        {
+          "foreground": "#63F08C",
+          "properties": {
+            "template": "\u279c"
+          },
+          "style": "plain",
+          "type": "text"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "console_title": true,
+  "console_title_style": "template",
+  "final_space": true,
+  "version": 1
+}
