@@ -22,12 +22,12 @@
           "type": "session"
         },
         {
-          "foreground": "#55B9C4",
+          "foreground": "#61d6d6",
           "properties": {
             "folder_separator_icon": "/",
             "home_icon": "~",
             "max_depth": 2,
-            "style": "mixed",
+            "style": "agnoster_full",
             "template": " \ue5fe {{ .Path }} "
           },
           "style": "plain",
