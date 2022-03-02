@@ -50,7 +50,7 @@
           "type": "git"
         },
         {
-          "foreground": "#502bd4",
+          "foreground": "#8a76d1",
           "properties": {
             "fetch_version": true,
             "template": "<#ffffff>via</> \uE77F {{ .Full }} "
