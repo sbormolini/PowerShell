@@ -24,7 +24,7 @@
         {
           "foreground": "#61d6d6",
           "properties": {
-            "folder_separator_icon": "/",
+            "folder_separator_icon": "\\",
             "home_icon": "~",
             "max_depth": 2,
             "style": "agnoster_full",
@@ -59,16 +59,6 @@
           "type": "dotnet"
         },
         {
-          "foreground": "#e7e7e7",
-          "properties": {
-              "template": "<#4286f4>\uf104</><#FEAC19>\uf0e7</><#4286f4>\uf105</> {{ .Full }} ",
-              "fetch_version": true,
-              "display_mode": "files"
-          },
-          "style": "plain",
-          "type": "azfunc"
-        },
-        {
           "foreground": "#83d2fe",
           "properties": {
             "template": "<#ffffff>via</> \uE235 {{ .Full }} ",
@@ -76,6 +66,16 @@
           },
           "type": "python",
           "style": "plain"
+        },
+        {
+          "foreground": "#e7e7e7",
+          "properties": {
+              "template": "<#6098f3>\uf104</><#fac055>\uf0e7</><#6098f3>\uf105</> {{ .Full }} ",
+              "fetch_version": true,
+              "display_mode": "files"
+          },
+          "style": "plain",
+          "type": "azfunc"
         }
       ],
       "type": "prompt"
