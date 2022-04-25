@@ -1,39 +1,41 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "final_space": true,
+  "version": 2,
   "blocks": [
     {
       "alignment": "left",
       "segments": [
         {
-          "foreground": "#ffe9aa",
-          "properties": {
-            "template": "\uf0e7 "
-          },
+          "type": "root",
           "style": "plain",
-          "type": "root"
+          "foreground": "#ffe9aa",
+          "template": "\uf0e7 "
         },
         {
+          "type": "session",
+          "style": "plain",
           "foreground": "#ffffff",
           "properties": {
-            "display_host": false,
-            "template": "{{ .UserName }} in"
+            "display_host": false
           },
-          "style": "plain",
-          "type": "session"
+          "template": "{{ .UserName }} in"
         },
         {
+          "type": "path",
+          "style": "plain",
           "foreground": "#61d6d6",
           "properties": {
-            "folder_separator_icon": "/",
+            "folder_separator_icon": "\\",
             "home_icon": "~",
             "max_depth": 2,
-            "style": "agnoster_full",
-            "template": " \ue5fe {{ .Path }} "
+            "style": "agnoster_full"
           },
-          "style": "plain",
-          "type": "path"
+          "template": " \ue5fe {{ .Path }} "
         },
         {
+          "type": "git",
+          "style": "plain",
           "foreground": "#95ffa4",
           "foreground_templates": [
             "{{ if or (.Working.Changed) (.Staging.Changed) }}#ffe9aa{{ end }}",
@@ -43,39 +45,37 @@
           "properties": {
             "fetch_stash_count": true,
             "fetch_status": true,
-            "fetch_upstream_icon": true,
-            "template": "<#ffffff>on {{ .UpstreamIcon }}</>{{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }} "
+            "fetch_upstream_icon": true
           },
-          "style": "plain",
-          "type": "git"
+          "template": "<#ffffff>on {{ .UpstreamIcon }}</>{{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }} "
         },
         {
+          "type": "dotnet",
+          "style": "plain",
           "foreground": "#8a76d1",
           "properties": {
-            "fetch_version": true,
-            "template": "<#ffffff>via</> \uE77F {{ .Full }} "
+            "fetch_version": true
           },
-          "style": "plain",
-          "type": "dotnet"
+          "template": "<#ffffff>via</> \uE77F {{ .Full }} "
         },
         {
-          "foreground": "#e7e7e7",
-          "properties": {
-              "template": "<#4286f4>\uf104</><#FEAC19>\uf0e7</><#4286f4>\uf105</> {{ .Full }} ",
-              "fetch_version": true,
-              "display_mode": "files"
-          },
+          "type": "python",
           "style": "plain",
-          "type": "azfunc"
-        },
-        {
           "foreground": "#83d2fe",
           "properties": {
-            "template": "<#ffffff>via</> \uE235 {{ .Full }} ",
             "display_mode": "context"
           },
-          "type": "python",
-          "style": "plain"
+          "template": "<#ffffff>via</> \uE235 {{ .Full }} "
+        },
+        {
+          "type": "azfunc",
+          "style": "plain",
+          "foreground": "#e7e7e7",
+          "properties": {
+            "display_mode": "files",
+            "fetch_version": true
+          },
+          "template": "<#6098f3>\uf104</><#fac055>\uf0e7</><#6098f3>\uf105</> {{ .Full }} "
         }
       ],
       "type": "prompt"
@@ -84,42 +84,42 @@
       "alignment": "right",
       "segments": [
         {
+          "type": "exit",
+          "style": "plain",
           "foreground": "#ffffff",
           "properties": {
-            "always_enabled": true,
-            "template": " {{ if gt .Code 0 }}<#C94A16>\uf659</>{{ else }}<#63F08C>\uf633</>{{ end }} "
+            "always_enabled": true
           },
-          "style": "plain",
-          "type": "exit"
+          "template": " {{ if gt .Code 0 }}<#C94A16>\uf659</>{{ else }}<#63F08C>\uf633</>{{ end }} "
         },
         {
+          "type": "executiontime",
+          "style": "plain",
           "foreground": "#ffffff",
           "properties": {
-            "always_enabled": true,
-            "template": "{{ .FormattedMs }} "
+            "always_enabled": true
           },
-          "style": "plain",
-          "type": "executiontime"
+          "template": "{{ .FormattedMs }} "
         },
         {
+          "type": "battery",
+          "style": "plain",
           "foreground": "#ffffff",
           "properties": {
             "charged_icon": "\uf583 ",
             "charging_icon": "\uf588 ",
-            "discharging_icon": "\uf57d ",
-            "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}% "
+            "discharging_icon": "\uf57d "
           },
-          "style": "plain",
-          "type": "battery"
+          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}% "
         },
         {
+          "type": "time",
+          "style": "plain",
           "foreground": "#ffffff",
           "properties": {
-            "template": " {{ .CurrentDate | date .Format }} ",
             "time_format": "15:04"
           },
-          "style": "plain",
-          "type": "time"
+          "template": " {{ .CurrentDate | date .Format }} "
         }
       ],
       "type": "prompt"
@@ -129,27 +129,19 @@
       "newline": true,
       "segments": [
         {
-          "foreground": "#e2e2e2",
-          "properties": {
-            "template": "{{ .Name }} "
-          },
           "type": "shell",
-          "style": "plain"
+          "style": "plain",
+          "foreground": "#e2e2e2",
+          "template": "{{ .Name }} "
         },
         {
-          "foreground": "#63F08C",
-          "properties": {
-            "template": "\u279c"
-          },
+          "type": "text",
           "style": "plain",
-          "type": "text"
+          "foreground": "#63F08C",
+          "template": "\u279c"
         }
       ],
       "type": "prompt"
     }
-  ],
-  "console_title": true,
-  "console_title_style": "template",
-  "final_space": true,
-  "version": 1
+  ]
 }
