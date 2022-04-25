@@ -1,0 +1,147 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "final_space": true,
+  "version": 2,
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "root",
+          "style": "plain",
+          "foreground": "#ffe9aa",
+          "template": "\uf0e7 "
+        },
+        {
+          "type": "session",
+          "style": "plain",
+          "foreground": "#ffffff",
+          "properties": {
+            "display_host": false
+          },
+          "template": "{{ .UserName }} in"
+        },
+        {
+          "type": "path",
+          "style": "plain",
+          "foreground": "#61d6d6",
+          "properties": {
+            "folder_separator_icon": "\\",
+            "home_icon": "~",
+            "max_depth": 2,
+            "style": "agnoster_full"
+          },
+          "template": " \ue5fe {{ .Path }} "
+        },
+        {
+          "type": "git",
+          "style": "plain",
+          "foreground": "#95ffa4",
+          "foreground_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#ffe9aa{{ end }}",
+            "{{ if gt .Ahead 0 }}#89d1dc{{ end }}",
+            "{{ if gt .Behind 0 }}#f26d50{{ end }}"
+          ],
+          "properties": {
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "template": "<#ffffff>on {{ .UpstreamIcon }}</>{{ .HEAD }}{{ .BranchStatus }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }} "
+        },
+        {
+          "type": "dotnet",
+          "style": "plain",
+          "foreground": "#8a76d1",
+          "properties": {
+            "fetch_version": true
+          },
+          "template": "<#ffffff>via</> \uE77F {{ .Full }} "
+        },
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "#83d2fe",
+          "properties": {
+            "display_mode": "context"
+          },
+          "template": "<#ffffff>via</> \uE235 {{ .Full }} "
+        },
+        {
+          "type": "azfunc",
+          "style": "plain",
+          "foreground": "#e7e7e7",
+          "properties": {
+            "display_mode": "files",
+            "fetch_version": true
+          },
+          "template": "<#6098f3>\uf104</><#fac055>\uf0e7</><#6098f3>\uf105</> {{ .Full }} "
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "exit",
+          "style": "plain",
+          "foreground": "#ffffff",
+          "properties": {
+            "always_enabled": true
+          },
+          "template": " {{ if gt .Code 0 }}<#C94A16>\uf659</>{{ else }}<#63F08C>\uf633</>{{ end }} "
+        },
+        {
+          "type": "executiontime",
+          "style": "plain",
+          "foreground": "#ffffff",
+          "properties": {
+            "always_enabled": true
+          },
+          "template": "{{ .FormattedMs }} "
+        },
+        {
+          "type": "battery",
+          "style": "plain",
+          "foreground": "#ffffff",
+          "properties": {
+            "charged_icon": "\uf583 ",
+            "charging_icon": "\uf588 ",
+            "discharging_icon": "\uf57d "
+          },
+          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}% "
+        },
+        {
+          "type": "time",
+          "style": "plain",
+          "foreground": "#ffffff",
+          "properties": {
+            "time_format": "15:04"
+          },
+          "template": " {{ .CurrentDate | date .Format }} "
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "shell",
+          "style": "plain",
+          "foreground": "#e2e2e2",
+          "template": "{{ .Name }} "
+        },
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "#63F08C",
+          "template": "\u279c"
+        }
+      ],
+      "type": "prompt"
+    }
+  ]
+}
