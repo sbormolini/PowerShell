@@ -45,7 +45,7 @@ function Find-DomainControllerInSubnet
                 {
                     Write-Verbose -Message "No DomainController found at address $($ipAddress)"
                 }
-                if ($null = $domainController)
+                if ($null -eq $domainController)
                 {
                     Write-Verbose -Message "DomainController found at address $($ipAddress)"
                     return  $domainController
