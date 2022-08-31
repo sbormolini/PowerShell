@@ -20,7 +20,10 @@ function Get-CmdletsFromScript
     (
         [Parameter(Mandatory=$false)]
         [ValidateNotNullOrEmpty()]
-        [string] $FilePath = "C:\Users\Sandro\Workspace\PowerShell\functions\Find-DomainControllerInSubnet.ps1"
+        [string] $FilePath,
+
+        [Parameter(Mandatory=$false)]
+        [switch] $PreLoadAllModules
     )
 
     # sources
@@ -28,9 +31,12 @@ function Get-CmdletsFromScript
     # https://docs.microsoft.com/en-us/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands?view=powershell-7.2
     # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_classes?view=powershell-7.2
 
-    # pre load all modules?
-    Get-Module -ListAvailable | Import-Module
-
+    # pre load all modules
+    if ($PreLoadAllModules)
+    {
+        Get-Module -ListAvailable | Import-Module
+    }
+    
     class CommandSearchResult
     {
         [string] $Name
@@ -89,20 +95,41 @@ function Get-CmdletsFromScript
 
     $content = Get-Content -Path $FilePath
     $lineCounter = 0
+    $isCommentSection = $false
     foreach ($line in $content) 
     {
-        foreach ($word in $line.Split(' '))
+        if ($line -eq "<#")
         {
-            if ($word -match $pattern)
+            $isCommentSection = $true
+        }
+
+        if ($line -eq "#>")
+        {
+            $isCommentSection = $false
+        }
+
+        if ($isCommentSection -eq $false)
+        {
+            $inline = $false
+            foreach ($word in $line.Split(' '))
             {
-                $command = Get-Command -Name $word -ErrorAction SilentlyContinue
-                $commands += [CommandSearchResult]::new(
-                    $command.Name ? $command.Name : $word,
-                    $command.Source ? $command.Source : "Module not loaded?",
-                    $lineCounter
-                )
+                if ($word -match $pattern)
+                {
+                    if ($line -match "^function $($pattern.Substring(1,$pattern.Length-1))")
+                    {
+                        $inline = $true
+                    }
+
+                    $command = Get-Command -Name $word -ErrorAction SilentlyContinue
+                    $commands += [CommandSearchResult]::new(
+                        $command.Name ? $command.Name : $word,
+                        $inline ? "In Script" : ($command.Source ? $command.Source : "Module not loaded"),
+                        $lineCounter
+                    )
+                }
             }
         }
+
         $lineCounter++
     }
 
